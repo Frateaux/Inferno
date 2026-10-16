@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="it" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dante Alighieri — L'Inferno | Edizione Interattiva di Studio (IT / EN)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <header class="topbar">
+        <div class="topbar-left">
+            <button id="sidebar-toggle" class="icon-btn" title="Mostra/Nascondi Elenco Canti (Sidebar)">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+            <div class="brand" id="brand-home">
+                <span class="brand-badge">DANTE ALIGHIERI</span>
+                <h1 class="brand-title">INFERNO <span class="brand-sub">Studio Critico Interattivo IT/EN</span></h1>
+            </div>
+        </div>
+
+        <nav class="topbar-tabs" role="tablist">
+            <button class="nav-tab active" data-view="study" role="tab">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+                <span>Lettura &amp; Studio</span>
+            </button>
+            <button class="nav-tab" data-view="map" role="tab">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon><line x1="8" y1="2" x2="8" y2="18"></line><line x1="16" y1="6" x2="16" y2="22"></line></svg>
+                <span>Mappa dell'Inferno</span>
+            </button>
+            <button class="nav-tab" data-view="indexes" role="tab">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                <span>Indici &amp; Personaggi</span>
+            </button>
+            <button class="nav-tab" data-view="intro" role="tab">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                <span>Introduzione &amp; Saggi</span>
+            </button>
+        </nav>
+
+        <div class="topbar-right">
+            <button id="open-search-btn" class="search-trigger" title="Ricerca globale (Ctrl+K)">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <span>Cerca versi, note, temi...</span>
+                <kbd>Ctrl K</kbd>
+            </button>
+            <button id="bookmarks-btn" class="icon-btn" title="I tuoi Segnalibri e Stato di Studio">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+                <span id="bookmarks-count" class="badge-pill hidden">0</span>
+            </button>
+            <button id="theme-toggle" class="icon-btn" title="Cambia Tema (Pergamena / Notturno)">
+                <svg id="theme-icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Workspace Layout -->
+    <div class="app-layout" id="app-layout">
+        <!-- Left Sidebar: 34 Cantos Navigator -->
+        <aside class="canto-sidebar" id="canto-sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-progress-box">
+                    <div class="progress-top">
+                        <span>Progresso Studio</span>
+                        <strong id="studied-progress-label">0 / 34 Canti</strong>
+                    </div>
+                    <div class="progress-bar-track">
+                        <div class="progress-bar-fill" id="studied-progress-bar" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div class="sidebar-filter">
+                    <input type="text" id="canto-filter-input" placeholder="Filtra canto, cerchio, personaggio..." autocomplete="off">
+                </div>
+            </div>
+            <div class="canto-list" id="canto-list">
+                <!-- Populated by JS -->
+            </div>
+        </aside>
+
+        <!-- Center Content Area -->
+        <main class="main-stage">
+            <!-- VIEW 1: STUDY VIEW (Default) -->
+            <section id="view-study" class="view-section active">
+                <div class="study-workspace">
+                    <!-- Left/Center Column: Canto Header + Interactive Outline + Verses -->
+                    <div class="reader-column" id="reader-column">
+                        <!-- Canto Hero Banner -->
+                        <div class="canto-hero" id="canto-hero">
+                            <div class="canto-hero-top">
+                                <div class="canto-nav-arrows">
+                                    <button id="prev-canto-btn" class="btn-outline btn-sm" title="Canto Precedente (←)">← Prec.</button>
+                                    <span class="canto-roman-pill" id="hero-canto-roman">CANTO I</span>
+                                    <button id="next-canto-btn" class="btn-outline btn-sm" title="Canto Successivo (→)">Succ. →</button>
+                                </div>
+                                <div class="canto-hero-actions">
+                                    <label class="studied-checkbox-label" title="Segna questo canto come completato/studiato">
+                                        <input type="checkbox" id="mark-studied-checkbox">
+                                        <span>Segna come studiato</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <h2 class="canto-main-title" id="hero-canto-title">INFERNO I — Selva Oscura e il Colle</h2>
+                            
+                            <div class="canto-meta-grid" id="hero-meta-grid">
+                                <div class="meta-card">
+                                    <span class="meta-label">Luogo / Cerchio</span>
+                                    <strong class="meta-value" id="meta-circle">—</strong>
+                                </div>
+                                <div class="meta-card">
+                                    <span class="meta-label">Peccatori / Anime</span>
+                                    <strong class="meta-value" id="meta-sinners">—</strong>
+                                </div>
+                                <div class="meta-card">
+                                    <span class="meta-label">Versi &amp; Note</span>
+                                    <strong class="meta-value" id="meta-counts">—</strong>
+                                </div>
+                            </div>
+
+                            <div class="canto-summary-box">
+                                <div class="summary-tabs">
+                                    <button class="sum-tab active" data-sumtab="overview">Sintesi &amp; Allegoria (IT / EN)</button>
+                                    <button class="sum-tab" data-sumtab="contrapasso">Il Contrapasso</button>
+                                    <button class="sum-tab" data-sumtab="characters">Personaggi &amp; Temi</button>
+                                </div>
+                                <div class="summary-content" id="summary-content-overview">
+                                    <p class="summary-it" id="hero-summary-it"></p>
+                                    <p class="summary-en" id="hero-summary-en"></p>
+                                </div>
+                                <div class="summary-content hidden" id="summary-content-contrapasso">
+                                    <p class="summary-it" id="hero-contrapasso-it"></p>
+                                    <p class="summary-en" id="hero-contrapasso-en"></p>
+                                </div>
+                                <div class="summary-content hidden" id="summary-content-characters">
+                                    <div class="tags-group">
+                                        <span class="tags-title">Personaggi e figure chiave:</span>
+                                        <div class="chip-list" id="hero-characters-list"></div>
+                                    </div>
+                                    <div class="tags-group" style="margin-top:10px;">
+                                        <span class="tags-title">Temi principali:</span>
+                                        <div class="chip-list" id="hero-themes-list"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Interactive Sticky Reader Toolbar -->
+                        <div class="reader-toolbar" id="reader-toolbar">
+                            <div class="toolbar-group">
+                                <span class="toolbar-label">Testo:</span>
+                                <div class="segmented-control" id="lang-mode-control">
+                                    <button class="seg-btn active" data-mode="parallel">Fronte IT / EN</button>
+                                    <button class="seg-btn" data-mode="interlinear">Interlineare</button>
+                                    <button class="seg-btn" data-mode="it">Solo IT</button>
+                                    <button class="seg-btn" data-mode="en">Solo EN</button>
+                                </div>
+                            </div>
+
+                            <div class="toolbar-group">
+                                <label class="toggle-pill" title="Mostra la spiegazione e parafrasi di ogni passaggio direttamente tra i blocchi di versi">
+                                    <input type="checkbox" id="inline-explanations-toggle" checked>
+                                    <span>Spiegazione Passaggi Inline</span>
+                                </label>
+                                <label class="toggle-pill" title="Evidenzia i versi con note di commento">
+                                    <input type="checkbox" id="highlight-annotated-toggle" checked>
+                                    <span>Indicatori Note (→)</span>
+                                </label>
+                            </div>
+
+                            <div class="toolbar-group">
+                                <button id="toggle-outline-collapse" class="btn-subtle btn-sm">Indice Passaggi ▾</button>
+                            </div>
+                        </div>
+
+                        <!-- Collapsible Interactive Outline (Passaggi del Canto) -->
+                        <div class="outline-drawer" id="outline-drawer">
+                            <div class="outline-drawer-header">
+                                <h3>Struttura narrativa e Passaggi del Canto (Clicca per saltare ai versi)</h3>
+                                <span class="outline-subtitle">Ogni passaggio include parafrasi e spiegazione in italiano e inglese</span>
+                            </div>
+                            <div class="outline-grid" id="canto-outline-grid">
+                                <!-- Populated by JS -->
+                            </div>
+                        </div>
+
+                        <!-- Poetry Verses Container -->
+                        <div class="poetry-container" id="poetry-container">
+                            <!-- Populated by JS -->
+                        </div>
+
+                        <!-- Bottom Canto Navigation Footer -->
+                        <div class="canto-footer-nav">
+                            <button id="footer-prev-btn" class="footer-nav-card">
+                                <span class="nav-dir">← Canto Precedente</span>
+                                <strong id="footer-prev-title">—</strong>
+                            </button>
+                            <button id="footer-next-btn" class="footer-nav-card align-right">
+                                <span class="nav-dir">Canto Successivo →</span>
+                                <strong id="footer-next-title">—</strong>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Right Docked Panel: Commentary, Notes & Passage Explanations -->
+                    <aside class="commentary-panel" id="commentary-panel">
+                        <div class="panel-header">
+                            <div class="panel-title-row">
+                                <h3>Apparato Critico &amp; Note</h3>
+                                <div class="segmented-control seg-sm" id="note-lang-control">
+                                    <button class="seg-btn active" data-notelang="both">IT + EN</button>
+                                    <button class="seg-btn" data-notelang="it">Solo IT</button>
+                                    <button class="seg-btn" data-notelang="en">Solo EN (Hollander)</button>
+                                </div>
+                            </div>
+                            <div class="panel-Tabs" id="panel-tabs">
+                                <button class="panel-tab active" data-ptab="all-notes">Tutte le Note (<span id="panel-notes-count">0</span>)</button>
+                                <button class="panel-tab" data-ptab="passages">Guida ai Passaggi (<span id="panel-passages-count">0</span>)</button>
+                            </div>
+                            <div class="panel-filter-bar">
+                                <input type="text" id="panel-note-search" placeholder="Cerca nelle note e spiegazioni di questo canto...">
+                                <button id="panel-show-all-btn" class="btn-xs hidden">Mostra tutte</button>
+                            </div>
+                        </div>
+
+                        <div class="panel-body" id="commentary-body">
+                            <!-- Populated by JS -->
+                        </div>
+                    </aside>
+                </div>
+            </section>
+
+            <!-- VIEW 2: INTERACTIVE MAP OF HELL -->
+            <section id="view-map" class="view-section">
+                <div class="map-view-container">
+                    <div class="section-banner">
+                        <h2>Architettura Morale e Topografia dell'Inferno Dantesco</h2>
+                        <p>Esplora la voragine infernale cerchio per cerchio oppure consulta le tavole originali dell'edizione Hollander (Jeffrey L. Ward). Clicca su qualsiasi cerchio o canto per aprirne lo studio interattivo.</p>
+                    </div>
+
+                    <div class="map-layout-grid">
+                        <!-- Interactive Funnel / Architecture of Hell -->
+                        <div class="hell-funnel-card">
+                            <h3>Voragine Infernale Interattiva (Ordinamento Morale — Inferno XI)</h3>
+                            <div id="hell-interactive-diagram" class="hell-diagram">
+                                <!-- Populated by JS -->
+                            </div>
+                        </div>
+
+                        <!-- Original Book Maps & Cover -->
+                        <div class="book-maps-card">
+                            <h3>Tavole Originali dal Volume (Clicca per ingrandire)</h3>
+                            <div class="maps-gallery">
+                                <div class="map-thumb-card" data-img="assets/img/map_hell_1.jpg" data-caption="Mappa dell'Inferno di Dante (Sezione Superiore e Generale)">
+                                    <img src="assets/img/map_hell_1.jpg" alt="Mappa dell'Inferno 1">
+                                    <span>Tavola I — Struttura Generale dell'Inferno</span>
+                                </div>
+                                <div class="map-thumb-card" data-img="assets/img/map_hell_2.jpg" data-caption="Mappa dell'Inferno di Dante (Basso Inferno, Malebolge e Cocito)">
+                                    <img src="assets/img/map_hell_2.jpg" alt="Mappa dell'Inferno 2">
+                                    <span>Tavola II — Malebolge e Lago di Cocito</span>
+                                </div>
+                                <div class="map-thumb-card" data-img="assets/img/cover.jpg" data-caption="Copertina: Hell and Fall of the Damned di Hieronymus Bosch">
+                                    <img src="assets/img/cover.jpg" alt="Copertina Inferno">
+                                    <span>Copertina — Hieronymus Bosch</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- VIEW 3: INDEXES OF NAMES, PLACES & SUBJECTS -->
+            <section id="view-indexes" class="view-section">
+                <div class="indexes-view-container">
+                    <div class="section-banner">
+                        <h2>Indici Analitici: Nomi, Luoghi e Soggetti Critici</h2>
+                        <p>Naviga tra i <strong>498 personaggi e luoghi</strong> citati nell'Inferno e i <strong>193 soggetti tematici e retorici</strong> trattati nelle note. Clicca su qualsiasi riferimento (es. <code>V.65</code> o <code>XXVI.93</code>) per aprire direttamente il canto e il verso corrispondente.</p>
+                    </div>
+
+                    <div class="index-controls-bar">
+                        <div class="segmented-control" id="index-type-control">
+                            <button class="seg-btn active" data-idxtype="names">Nomi, Personaggi e Luoghi (498)</button>
+                            <button class="seg-btn" data-idxtype="subjects">Soggetti e Temi nelle Note (193)</button>
+                            <button class="seg-btn" data-idxtype="commentators">Commentatori Storici (1322–1982)</button>
+                        </div>
+                        <input type="text" id="index-search-input" class="index-search" placeholder="Filtra per nome, luogo o argomento (es. Ulysses, Achilles, contrapasso, Florence)...">
+                    </div>
+
+                    <div id="index-results-grid" class="index-results-grid">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- VIEW 4: INTRODUCTION & ESSAYS -->
+            <section id="view-intro" class="view-section">
+                <div class="intro-view-container">
+                    <div class="essay-reader">
+                        <div class="essay-nav">
+                            <button class="essay-tab active" data-essay="intro">Introduzione di Robert Hollander</button>
+                            <button class="essay-tab" data-essay="translation">Nota sulla Traduzione (Jean &amp; Robert Hollander)</button>
+                            <button class="essay-tab" data-essay="guide">Guida allo Studio dell'Inferno (Sintesi in Italiano)</button>
+                        </div>
+                        <article class="essay-body" id="essay-body">
+                            <!-- Populated by JS -->
+                        </article>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Global Search Modal (Ctrl+K) -->
+    <div class="modal-backdrop hidden" id="search-modal">
+        <div class="search-modal-dialog">
+            <div class="search-modal-header">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <input type="text" id="global-search-input" placeholder="Cerca qualsiasi parola in tutti i 4.720 versi (IT/EN), nei passaggi o nelle 687 note..." autocomplete="off">
+                <button id="close-search-modal" class="btn-xs">ESC</button>
+            </div>
+            <div class="search-modal-filters">
+                <label><input type="checkbox" id="s-filter-verses" checked> Versi (IT &amp; EN)</label>
+                <label><input type="checkbox" id="s-filter-passages" checked> Spiegazioni Passaggi</label>
+                <label><input type="checkbox" id="s-filter-notes" checked> Note Critiche (IT &amp; EN)</label>
+                <span id="search-stats-count" class="search-stats-label">Digita almeno 2 caratteri...</span>
+            </div>
+            <div class="search-modal-results" id="global-search-results">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Bookmarks Modal -->
+    <div class="modal-backdrop hidden" id="bookmarks-modal">
+        <div class="search-modal-dialog">
+            <div class="search-modal-header">
+                <h3 style="margin:0; font-family:var(--font-display);">I Tuoi Versi Salvati &amp; Segnalibri</h3>
+                <button id="close-bookmarks-modal" class="btn-xs">Chiudi</button>
+            </div>
+            <div class="search-modal-results" id="bookmarks-list-container">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Lightbox Modal -->
+    <div class="modal-backdrop hidden" id="lightbox-modal">
+        <div class="lightbox-dialog">
+            <button id="close-lightbox" class="btn-xs lightbox-close">Chiudi ✕</button>
+            <img id="lightbox-img" src="" alt="Immagine ingrandita">
+            <p id="lightbox-caption"></p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="data/inferno_data.js"></script>
+    <script src="data/extra_data.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
